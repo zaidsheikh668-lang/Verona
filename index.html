@@ -57,6 +57,11 @@ body.cursor-grow .cursor{width:52px;height:52px}
  .hero-overlay{background:linear-gradient(0deg,rgba(7,7,6,.9) 0%,rgba(7,7,6,.38) 58%,rgba(7,7,6,.15) 100%)}
  .mobile-pad{padding-left:22px;padding-right:22px}
  .desktop-only{display:none!important}
+ .nav .serif{font-size:1.65rem}
+ .project{transition:border-color .5s ease,transform .5s ease}
+ .project:hover{border-color:rgba(198,166,106,.42);transform:translateY(-2px)}
+ .modal-panel{animation:modalIn .45s cubic-bezier(.2,.8,.2,1)}
+ @keyframes modalIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
 }
 @media(prefers-reduced-motion:reduce){
  html{scroll-behavior:auto}.hero-image,.project-image,.material img,.reveal{transition:none}.marquee-track{animation:none}
@@ -97,7 +102,7 @@ body.cursor-grow .cursor{width:52px;height:52px}
 </div>
 
 <main>
-<section class="hero relative min-h-screen flex items-end overflow-hidden">
+<section class="hero relative min-h-screen flex items-end overflow-hidden" aria-label="VÉRONA private architecture">
   <img class="hero-image absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=88" alt="Contemporary luxury villa interior">
   <div class="hero-overlay absolute inset-0"></div>
   <div class="relative z-10 w-full max-w-[1500px] mx-auto px-5 md:px-8 pb-16 md:pb-24 pt-40">
@@ -232,14 +237,30 @@ body.cursor-grow .cursor{width:52px;height:52px}
 <script>
 const menu=document.getElementById('mobileMenu'),modal=document.getElementById('modal');
 function toggleMenu(){menu.classList.toggle('open');document.body.classList.toggle('no-scroll',menu.classList.contains('open'))}
-function openMenu(){modal.classList.remove('hidden');modal.classList.add('flex')}
-function closeModal(){modal.classList.add('hidden');modal.classList.remove('flex')}
+function openMenu(){
+  menu.classList.remove('open');
+  document.body.classList.remove('no-scroll');
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  document.body.classList.add('no-scroll');
+}
+function closeModal(){
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+  document.body.classList.remove('no-scroll');
+}
 function submitForm(e){e.preventDefault();e.target.innerHTML='<div class="py-10 text-center"><div class="label">ENQUIRY RECEIVED</div><h3 class="serif text-3xl mt-3">Thank you.</h3><p class="text-sm text-[#918a7d] mt-3">This concept form is ready to connect to a real enquiry inbox.</p><button type="button" onclick="closeModal()" class="mt-7 text-[10px] tracking-[2px] text-[#c6a66a]">CLOSE</button></div>'}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.classList.remove('open');document.body.classList.remove('no-scroll');closeModal()}})
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.classList.remove('open');closeModal()}})
 const progress=document.getElementById('progress');
 window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-innerHeight;progress.style.width=(scrollY/h*100)+'%'},{passive:true});
 const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.querySelectorAll('img').forEach(img=>{
+  img.addEventListener('error',()=>{
+    img.style.opacity='.18';
+    img.alt='VÉRONA architectural image';
+  });
+});
 const cursor=document.getElementById('cursor');
 if(matchMedia('(pointer:fine)').matches){document.body.classList.add('cursor-ready');addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-grow'));el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-grow'))})}
 </script>
