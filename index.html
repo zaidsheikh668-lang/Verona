@@ -1,840 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VÉRONA • Private Architecture</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@family=Playfair+Display:wght@400;700&amp;family=Playfair+Display:ital@1&amp;family=Inter:wght@300;400;500&amp;display=swap');
-        
-        :root {
-            --obsidian: #070706;
-            --ivory: #F3EEE4;
-            --gold: #C6A66A;
-            --charcoal: #151412;
-            --taupe: #918A7D;
-        }
-        
-        body {
-            font-family: 'Inter', system_ui, sans-serif;
-            background-color: #070706;
-            color: #F3EEE4;
-        }
-        
-        .serif {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-feature-settings: "ss01";
-        }
-        
-        .luxury-nav {
-            backdrop-filter: blur(20px);
-            background: rgba(7, 7, 6, 0.85);
-        }
-        
-        .section-label {
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            font-weight: 400;
-        }
-        
-        .editorial-headline {
-            font-size: clamp(3.2rem, 7vw, 5.8rem);
-            line-height: 0.95;
-            font-weight: 700;
-            letter-spacing: -2.5px;
-        }
-        
-        .cinematic-overlay {
-            background: linear-gradient(
-                to bottom, 
-                rgba(7, 7, 6, 0.35) 0%, 
-                rgba(7, 7, 6, 0.15) 30%, 
-                rgba(7, 7, 6, 0.65) 75%
-            );
-        }
-        
-        .gold {
-            color: #C6A66A;
-        }
-        
-        .premium-image {
-            transition: transform 1.8s cubic-bezier(0.23, 1, 0.32, 1);
-            will-change: transform;
-        }
-        
-        .project-card:hover .premium-image {
-            transform: scale(1.08);
-        }
-        
-        .project-card:hover .gold-line {
-            width: 60px;
-            transition: width 800ms cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background-color: #C6A66A;
-            transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .nav-link:hover:after {
-            width: 100%;
-        }
-        
-        .luxury-button {
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .luxury-button:hover {
-            transform: translateY(-1px);
-        }
-        
-        .scroll-indicator {
-            animation: scrollDown 2.5s ease infinite;
-        }
-        
-        @keyframes scrollDown {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(8px); }
-        }
-        
-        .editorial-text {
-            font-size: 1.05rem;
-            line-height: 1.65;
-            color: #918A7D;
-        }
-        
-        .image-reveal {
-            overflow: hidden;
-        }
-        
-        .image-reveal img {
-            transition: transform 1.6s cubic-bezier(0.23, 1.0, 0.32, 1);
-        }
-        
-        .section-header {
-            font-size: clamp(2.8rem, 5.5vw, 4.2rem);
-            line-height: 1.05;
-            letter-spacing: -1.5px;
-        }
-        
-        .horizontal-scroll {
-            scrollbar-width: none;
-        }
-        
-        .horizontal-scroll::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .material-img {
-            transition: transform 2.2s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .premium-hover:hover .material-img {
-            transform: scale(1.06);
-        }
-        
-        .subtle-parallax {
-            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .nav-active {
-            color: #C6A66A;
-        }
-        
-        .magazine-title {
-            font-size: 1.35rem;
-            line-height: 1.2;
-            letter-spacing: -0.4px;
-        }
-        
-        .cinematic-section {
-            background-attachment: fixed;
-        }
-        
-        .gold-accent {
-            color: #C6A66A;
-            font-style: italic;
-        }
-        
-        .minimal-divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, #C6A66A, transparent);
-            opacity: 0.15;
-        }
-        
-        .custom-cursor {
-            pointer-events: none;
-            position: fixed;
-            z-index: 9999;
-            width: 24px;
-            height: 24px;
-            border: 1px solid #C6A66A;
-            border-radius: 50%;
-            mix-blend-mode: difference;
-            transition: all 0.15s ease;
-            display: none;
-        }
-        
-        @media (min-width: 1024px) {
-            .custom-cursor {
-                display: block;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070706">
+<title>VÉRONA — Private Architecture</title>
+<meta name="description" content="VÉRONA creates private residences shaped by light, material and considered living.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--black:#070706;--ivory:#f3eee4;--gold:#c6a66a;--muted:#918a7d;--line:rgba(243,238,228,.13)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--black);color:var(--ivory);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden}
+.serif{font-family:'Playfair Display',Georgia,serif}
+::selection{background:var(--gold);color:var(--black)}
+.nav{background:rgba(7,7,6,.62);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(243,238,228,.1)}
+.nav-link{position:relative;color:var(--ivory);font-size:11px;letter-spacing:2.2px;text-transform:uppercase}
+.nav-link:after{content:"";position:absolute;left:0;bottom:-8px;width:0;height:1px;background:var(--gold);transition:.45s ease}
+.nav-link:hover:after{width:100%}
+.gold{color:var(--gold)}
+.label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.hero-image{transform:scale(1.04);transition:transform 7s cubic-bezier(.2,.7,.2,1)}
+.hero:hover .hero-image{transform:scale(1)}
+.hero-overlay{background:linear-gradient(90deg,rgba(7,7,6,.82) 0%,rgba(7,7,6,.38) 52%,rgba(7,7,6,.18) 100%),linear-gradient(0deg,rgba(7,7,6,.72),transparent 45%)}
+.headline{font-size:clamp(3.5rem,8vw,7.8rem);line-height:.86;letter-spacing:-.055em}
+.section-title{font-size:clamp(2.7rem,5.5vw,5.4rem);line-height:.94;letter-spacing:-.045em}
+.editorial{font-size:16px;line-height:1.8;color:var(--muted)}
+.rule{height:1px;background:linear-gradient(90deg,var(--gold),transparent);opacity:.5}
+.project{border:1px solid var(--line);background:#0a0a09}
+.project-image{transition:transform 1.5s cubic-bezier(.2,.7,.2,1)}
+.project:hover .project-image{transform:scale(1.055)}
+.project-line{width:28px;transition:width .7s ease}
+.project:hover .project-line{width:64px}
+.material{position:relative;overflow:hidden}
+.material img{transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.material:hover img{transform:scale(1.07)}
+.material:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.72));pointer-events:none}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--gold);z-index:100;width:0}
+.cursor{position:fixed;width:22px;height:22px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:99;transform:translate(-50%,-50%);opacity:0;transition:width .25s,height .25s,opacity .25s}
+body.cursor-ready .cursor{opacity:1}
+body.cursor-grow .cursor{width:52px;height:52px}
+.menu-panel{transform:translateY(-100%);transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.menu-panel.open{transform:translateY(0)}
+.no-scroll{overflow:hidden}
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-flex;gap:40px;animation:marquee 28s linear infinite}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@media(max-width:767px){
+ .hero{min-height:100svh}
+ .headline{font-size:clamp(3.25rem,17vw,5.2rem)}
+ .hero-overlay{background:linear-gradient(0deg,rgba(7,7,6,.9) 0%,rgba(7,7,6,.38) 58%,rgba(7,7,6,.15) 100%)}
+ .mobile-pad{padding-left:22px;padding-right:22px}
+ .desktop-only{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}.hero-image,.project-image,.material img,.reveal{transition:none}.marquee-track{animation:none}
+}
+</style>
 </head>
-<body class="bg-[#070706] text-[#F3EEE4] overflow-x-hidden">
-    <!-- Custom Cursor -->
-    <div id="cursor" class="custom-cursor hidden lg:block"></div>
-    
-    <!-- Floating Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 luxury-nav border-b border-white border-opacity-10">
-        <div class="max-w-screen-2xl mx-auto">
-            <div class="px-8 py-6 flex items-center justify-between">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <div class="flex items-baseline">
-                        <span class="text-3xl font-bold tracking-[-1.5px] serif">VÉRONA</span>
-                    </div>
-                </div>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center gap-x-10 text-sm font-light tracking-widest">
-                    <a href="#collections" class="nav-link text-[#F3EEE4] hover:text-[#C6A66A]">Collections</a>
-                    <a href="#philosophy" class="nav-link text-[#F3EEE4] hover:text-[#C6A66A]">Philosophy</a>
-                    <a href="#journal" class="nav-link text-[#F3EEE4] hover:text-[#C6A66A]">Journal</a>
-                    <a href="#contact" class="nav-link text-[#F3EEE4] hover:text-[#C6A66A]">Contact</a>
-                </div>
-                
-                <!-- Private Enquiry -->
-                <div class="hidden md:block">
-                    <button onclick="showEnquiryModal()"
-                            class="px-6 py-3 text-xs tracking-[2px] font-medium border border-[#C6A66A] text-[#C6A66A] hover:bg-[#C6A66A] hover:text-[#070706] transition-all duration-500 flex items-center gap-x-2">
-                        <span>PRIVATE ENQUIRY</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </button>
-                </div>
-                
-                <!-- Mobile Menu -->
-                <div class="md:hidden">
-                    <button class="text-[#F3EEE4] p-2">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+<body>
+<div class="progress" id="progress"></div>
+<div class="cursor" id="cursor"></div>
+
+<header class="nav fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-[1500px] mx-auto px-5 md:px-8 h-[78px] flex items-center justify-between">
+    <a href="#" class="serif text-2xl md:text-3xl tracking-[-.04em]">VÉRONA</a>
+    <nav class="hidden md:flex items-center gap-9">
+      <a class="nav-link" href="#collections">Collections</a>
+      <a class="nav-link" href="#philosophy">Philosophy</a>
+      <a class="nav-link" href="#materiality">Materiality</a>
+      <a class="nav-link" href="#journal">Journal</a>
     </nav>
-    
-    <!-- HERO SECTION -->
-    <section class="relative h-screen w-full flex items-center justify-center pt-16">
-        <!-- Cinematic Background -->
-        <div class="absolute inset-0 bg-[#070706]">
-            <img src="https://picsum.photos/id/1015/2000/1200" 
-                 class="w-full h-full object-cover opacity-90" 
-                 alt="Extraordinary contemporary villa at golden hour surrounded by natural landscape">
-            <div class="cinematic-overlay absolute inset-0"></div>
-        </div>
-        
-        <div class="relative z-10 max-w-screen-2xl px-8 w-full">
-            <div class="max-w-4xl">
-                <!-- Eyebrow -->
-                <div class="flex items-center gap-x-3 mb-6">
-                    <div class="h-px w-8 bg-[#C6A66A]"></div>
-                    <span class="section-label text-[#C6A66A] tracking-[3.5px]">PRIVATE ARCHITECTURE / 01</span>
-                </div>
-                
-                <!-- Headline -->
-                <h1 class="editorial-headline serif leading-none tracking-tighter mb-2">
-                    Spaces<br>
-                    <span class="font-light italic text-[#C6A66A]">Beyond</span><br>
-                    Ordinary.
-                </h1>
-                
-                <!-- Supporting Text -->
-                <p class="max-w-md mt-6 text-[#F3EEE4] text-lg font-light tracking-tight">
-                    Architecture shaped around light, material and the quiet luxury of space.
-                </p>
-                
-                <!-- CTAs -->
-                <div class="flex flex-col sm:flex-row gap-4 mt-10">
-                    <button onclick="document.getElementById('collections').scrollIntoView({ behavior: 'smooth' })" 
-                            class="luxury-button px-8 py-4 bg-[#C6A66A] text-[#070706] font-medium tracking-widest text-sm flex items-center justify-center gap-x-3 hover:bg-white">
-                        <span>EXPLORE COLLECTION</span>
-                    </button>
-                    
-                    <button onclick="showEnquiryModal()"
-                            class="luxury-button px-8 py-4 border border-[#C6A66A] text-[#C6A66A] hover:bg-white hover:text-[#070706] flex items-center justify-center gap-x-3 text-sm tracking-widest">
-                        <span>PRIVATE ENQUIRY</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
-            <span class="text-[10px] tracking-[2px] text-[#918A7D] mb-2">SCROLL TO DISCOVER</span>
-            <div class="w-px h-8 bg-gradient-to-b from-[#C6A66A] to-transparent scroll-indicator"></div>
-        </div>
-    </section>
-    
-    <!-- SECTION 02 — PHILOSOPHY -->
-    <section id="philosophy" class="max-w-screen-2xl mx-auto px-8 pt-24 pb-20">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-x-8 items-center">
-            <!-- Left Content -->
-            <div class="lg:col-span-7 lg:pr-12">
-                <div class="mb-6">
-                    <span class="section-label text-[#C6A66A]">02 — PHILOSOPHY</span>
-                </div>
-                
-                <h2 class="section-header serif tracking-tighter leading-none mb-9">
-                    We don't design houses.<br>
-                    We design how life<br>feels inside them.
-                </h2>
-                
-                <div class="max-w-md">
-                    <p class="editorial-text text-lg">
-                        Our work is defined by restraint, proportion, and an unwavering attention to how light moves through space. Every residence is a meditation on time, material, and presence.
-                    </p>
-                    
-                    <div class="mt-8 flex items-center gap-x-4">
-                        <div class="h-px w-6 bg-[#C6A66A]"></div>
-                        <span class="text-sm tracking-widest text-[#C6A66A]">EST. 2012 • GENEVA • DUBAI</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Right Image -->
-            <div class="lg:col-span-5 mt-12 lg:mt-0">
-                <div class="image-reveal relative aspect-[16/10] overflow-hidden bg-[#151412]">
-                    <img src="https://picsum.photos/id/1005/1200/900" 
-                         class="premium-image w-full h-full object-cover" 
-                         alt="Architectural detail of light and shadow in a minimalist villa interior"
-                         loading="lazy">
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- SECTION 03 — SIGNATURE COLLECTION -->
-    <section id="collections" class="max-w-screen-2xl mx-auto px-8 py-16 border-t border-white border-opacity-10">
-        <div class="mb-10 flex justify-between items-end">
-            <div>
-                <span class="section-label text-[#C6A66A]">03 — SIGNATURE COLLECTION</span>
-                <h3 class="text-5xl serif tracking-tighter mt-2">Selected Residences</h3>
-            </div>
-        </div>
-        
-        <!-- Projects -->
-        <div class="space-y-8">
-            <!-- Project 01 -->
-            <div class="project-card group grid grid-cols-1 lg:grid-cols-12 border border-white border-opacity-10 overflow-hidden">
-                <div class="lg:col-span-8 relative aspect-video lg:aspect-auto lg:h-[460px] overflow-hidden">
-                    <img src="https://picsum.photos/id/1016/1600/900" 
-                         class="premium-image w-full h-full object-cover" 
-                         alt="CASA NOIR - Contemporary villa in Dubai Hills at golden hour"
-                         loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
-                </div>
-                <div class="lg:col-span-4 p-9 lg:p-10 flex flex-col justify-between bg-[#0A0A09]">
-                    <div>
-                        <div class="flex items-center gap-x-3 mb-4">
-                            <span class="text-[#C6A66A] text-sm font-light">01</span>
-                            <div class="h-px flex-1 bg-white bg-opacity-10"></div>
-                        </div>
-                        <h4 class="text-4xl serif tracking-tighter">CASA NOIR</h4>
-                        <p class="text-[#918A7D] mt-1">Dubai Hills</p>
-                    </div>
-                    
-                    <div>
-                        <div class="gold-line w-8 h-px bg-[#C6A66A] mb-4 transition-all duration-700"></div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs tracking-[1.5px]">8,400 SQ.FT • 2024</span>
-                            <button class="text-xs flex items-center gap-x-1 text-[#C6A66A]">
-                                VIEW RESIDENCE <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Project 02 -->
-            <div class="project-card group grid grid-cols-1 lg:grid-cols-12 border border-white border-opacity-10 overflow-hidden">
-                <div class="lg:col-span-8 relative aspect-video lg:aspect-auto lg:h-[460px] overflow-hidden">
-                    <img src="https://picsum.photos/id/1033/1600/900" 
-                         class="premium-image w-full h-full object-cover" 
-                         alt="THE AURELIA - Waterfront villa on Palm Jumeirah"
-                         loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
-                </div>
-                <div class="lg:col-span-4 p-9 lg:p-10 flex flex-col justify-between bg-[#0A0A09]">
-                    <div>
-                        <div class="flex items-center gap-x-3 mb-4">
-                            <span class="text-[#C6A66A] text-sm font-light">02</span>
-                            <div class="h-px flex-1 bg-white bg-opacity-10"></div>
-                        </div>
-                        <h4 class="text-4xl serif tracking-tighter">THE AURELIA</h4>
-                        <p class="text-[#918A7D] mt-1">Palm Jumeirah</p>
-                    </div>
-                    
-                    <div>
-                        <div class="gold-line w-8 h-px bg-[#C6A66A] mb-4 transition-all duration-700"></div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs tracking-[1.5px]">11,200 SQ.FT • 2023</span>
-                            <button class="text-xs flex items-center gap-x-1 text-[#C6A66A]">
-                                VIEW RESIDENCE <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Project 03 -->
-            <div class="project-card group grid grid-cols-1 lg:grid-cols-12 border border-white border-opacity-10 overflow-hidden">
-                <div class="lg:col-span-8 relative aspect-video lg:aspect-auto lg:h-[460px] overflow-hidden">
-                    <img src="https://picsum.photos/id/1009/1600/900" 
-                         class="premium-image w-full h-full object-cover" 
-                         alt="VILLA ÉLAN - Modern residence in Emirates Hills"
-                         loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
-                </div>
-                <div class="lg:col-span-4 p-9 lg:p-10 flex flex-col justify-between bg-[#0A0A09]">
-                    <div>
-                        <div class="flex items-center gap-x-3 mb-4">
-                            <span class="text-[#C6A66A] text-sm font-light">03</span>
-                            <div class="h-px flex-1 bg-white bg-opacity-10"></div>
-                        </div>
-                        <h4 class="text-4xl serif tracking-tighter">VILLA ÉLAN</h4>
-                        <p class="text-[#918A7D] mt-1">Emirates Hills</p>
-                    </div>
-                    
-                    <div>
-                        <div class="gold-line w-8 h-px bg-[#C6A66A] mb-4 transition-all duration-700"></div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs tracking-[1.5px]">14,600 SQ.FT • 2024</span>
-                            <button class="text-xs flex items-center gap-x-1 text-[#C6A66A]">
-                                VIEW RESIDENCE <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- SECTION 04 — MATERIAL / DETAIL -->
-    <section class="max-w-screen-2xl mx-auto px-8 py-20">
-        <div class="max-w-xl mb-12">
-            <span class="section-label text-[#C6A66A]">04 — MATERIALITY</span>
-            <h3 class="section-header serif mt-3 tracking-tighter">Material becomes atmosphere.</h3>
-        </div>
-        
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-            <div class="premium-hover group aspect-square relative overflow-hidden">
-                <img src="https://picsum.photos/id/106/600/600" class="material-img w-full h-full object-cover" alt="Travertine stone detail" loading="lazy">
-                <div class="absolute bottom-0 left-0 p-5">
-                    <span class="text-xs tracking-widest bg-black bg-opacity-60 px-3 py-1">TRAVERTINE</span>
-                </div>
-            </div>
-            <div class="premium-hover group aspect-square relative overflow-hidden">
-                <img src="https://picsum.photos/id/160/600/600" class="material-img w-full h-full object-cover" alt="Calacatta marble detail" loading="lazy">
-                <div class="absolute bottom-0 left-0 p-5">
-                    <span class="text-xs tracking-widest bg-black bg-opacity-60 px-3 py-1">CALACATTA MARBLE</span>
-                </div>
-            </div>
-            <div class="premium-hover group aspect-square relative overflow-hidden">
-                <img src="https://picsum.photos/id/201/600/600" class="material-img w-full h-full object-cover" alt="Walnut wood detail" loading="lazy">
-                <div class="absolute bottom-0 left-0 p-5">
-                    <span class="text-xs tracking-widest bg-black bg-opacity-60 px-3 py-1">WALNUT</span>
-                </div>
-            </div>
-            <div class="premium-hover group aspect-square relative overflow-hidden">
-                <img src="https://picsum.photos/id/251/600/600" class="material-img w-full h-full object-cover" alt="Bronze metal detail" loading="lazy">
-                <div class="absolute bottom-0 left-0 p-5">
-                    <span class="text-xs tracking-widest bg-black bg-opacity-60 px-3 py-1">BRONZE</span>
-                </div>
-            </div>
-            <div class="premium-hover group aspect-square relative overflow-hidden">
-                <img src="https://picsum.photos/id/180/600/600" class="material-img w-full h-full object-cover" alt="Hand-blown glass detail" loading="lazy">
-                <div class="absolute bottom-0 left-0 p-5">
-                    <span class="text-xs tracking-widest bg-black bg-opacity-60 px-3 py-1">HAND-BLOWN GLASS</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- SECTION 05 — THE EXPERIENCE -->
-    <section class="py-16 bg-[#0A0A09]">
-        <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="mb-8">
-                <span class="section-label text-[#C6A66A]">05 — THE EXPERIENCE</span>
-            </div>
-            
-            <div class="horizontal-scroll flex gap-4 overflow-x-auto pb-6 snap-x snap-mandatory">
-                <div class="min-w-[85%] md:min-w-[380px] snap-start">
-                    <div class="aspect-video relative overflow-hidden mb-5">
-                        <img src="https://picsum.photos/id/1006/800/600" class="w-full h-full object-cover" alt="Arrival experience" loading="lazy">
-                        <div class="absolute inset-0 flex items-end p-8 bg-gradient-to-t from-black/70">
-                            <div>
-                                <span class="text-[#C6A66A] text-sm">01</span>
-                                <h5 class="text-3xl serif tracking-tight">Arrival</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="min-w-[85%] md:min-w-[380px] snap-start">
-                    <div class="aspect-video relative overflow-hidden mb-5">
-                        <img src="https://picsum.photos/id/1018/800/600" class="w-full h-full object-cover" alt="Light experience" loading="lazy">
-                        <div class="absolute inset-0 flex items-end p-8 bg-gradient-to-t from-black/70">
-                            <div>
-                                <span class="text-[#C6A66A] text-sm">02</span>
-                                <h5 class="text-3xl serif tracking-tight">Light</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="min-w-[85%] md:min-w-[380px] snap-start">
-                    <div class="aspect-video relative overflow-hidden mb-5">
-                        <img src="https://picsum.photos/id/160/800/600" class="w-full h-full object-cover" alt="Material experience" loading="lazy">
-                        <div class="absolute inset-0 flex items-end p-8 bg-gradient-to-t from-black/70">
-                            <div>
-                                <span class="text-[#C6A66A] text-sm">03</span>
-                                <h5 class="text-3xl serif tracking-tight">Material</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="min-w-[85%] md:min-w-[380px] snap-start">
-                    <div class="aspect-video relative overflow-hidden mb-5">
-                        <img src="https://picsum.photos/id/251/800/600" class="w-full h-full object-cover" alt="Silence experience" loading="lazy">
-                        <div class="absolute inset-0 flex items-end p-8 bg-gradient-to-t from-black/70">
-                            <div>
-                                <span class="text-[#C6A66A] text-sm">04</span>
-                                <h5 class="text-3xl serif tracking-tight">Silence</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="min-w-[85%] md:min-w-[380px] snap-start">
-                    <div class="aspect-video relative overflow-hidden mb-5">
-                        <img src="https://picsum.photos/id/1033/800/600" class="w-full h-full object-cover" alt="View experience" loading="lazy">
-                        <div class="absolute inset-0 flex items-end p-8 bg-gradient-to-t from-black/70">
-                            <div>
-                                <span class="text-[#C6A66A] text-sm">05</span>
-                                <h5 class="text-3xl serif tracking-tight">View</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- SECTION 06 — JOURNAL -->
-    <section id="journal" class="max-w-screen-2xl mx-auto px-8 py-20">
-        <div class="flex justify-between items-end mb-10">
-            <div>
-                <span class="section-label text-[#C6A66A]">06 — JOURNAL</span>
-                <h3 class="text-5xl serif tracking-tighter mt-1">Notes on Modern Living</h3>
-            </div>
-            <a href="#" class="hidden md:flex items-center text-sm text-[#C6A66A]">VIEW ALL <i class="fas fa-arrow-right ml-2"></i></a>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="group">
-                <div class="overflow-hidden aspect-video mb-6">
-                    <img src="https://picsum.photos/id/1015/700/500" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2000ms]" alt="Architecture &amp; Natural Light" loading="lazy">
-                </div>
-                <div class="px-1">
-                    <span class="text-xs text-[#918A7D]">FEBRUARY 2025</span>
-                    <h4 class="magazine-title serif mt-3 group-hover:text-[#C6A66A] transition-colors">Architecture &amp; Natural Light</h4>
-                </div>
-            </div>
-            <div class="group">
-                <div class="overflow-hidden aspect-video mb-6">
-                    <img src="https://picsum.photos/id/1005/700/500" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2000ms]" alt="Designing for Stillness" loading="lazy">
-                </div>
-                <div class="px-1">
-                    <span class="text-xs text-[#918A7D]">JANUARY 2025</span>
-                    <h4 class="magazine-title serif mt-3 group-hover:text-[#C6A66A] transition-colors">Designing for Stillness</h4>
-                </div>
-            </div>
-            <div class="group">
-                <div class="overflow-hidden aspect-video mb-6">
-                    <img src="https://picsum.photos/id/106/700/500" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2000ms]" alt="The New Language of Luxury" loading="lazy">
-                </div>
-                <div class="px-1">
-                    <span class="text-xs text-[#918A7D]">DECEMBER 2024</span>
-                    <h4 class="magazine-title serif mt-3 group-hover:text-[#C6A66A] transition-colors">The New Language of Luxury</h4>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- SECTION 07 — FINAL CTA -->
-    <section id="contact" class="relative py-24 border-t border-white border-opacity-10">
-        <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="relative rounded-none overflow-hidden">
-                <img src="https://picsum.photos/id/1018/2000/900" class="w-full h-[520px] object-cover" alt="Cinematic luxury villa interior" loading="lazy">
-                <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/80"></div>
-                
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="max-w-xl text-center px-6">
-                        <h2 class="text-5xl md:text-6xl serif tracking-[-1.8px] leading-none">
-                            Your next address<br>should feel<br>unforgettable.
-                        </h2>
-                        
-                        <p class="mt-6 max-w-sm mx-auto text-[#918A7D]">
-                            Private residences, considered architecture and spaces designed around you.
-                        </p>
-                        
-                        <button onclick="showEnquiryModal()" 
-                                class="mt-8 luxury-button px-9 py-4 border border-[#C6A66A] text-[#C6A66A] hover:bg-[#C6A66A] hover:text-[#070706] flex items-center gap-x-3 mx-auto text-sm tracking-[2px]">
-                            <span>BEGIN A PRIVATE CONVERSATION</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- FOOTER -->
-    <footer class="bg-[#070706] border-t border-white border-opacity-10">
-        <div class="max-w-screen-2xl mx-auto px-8 py-12">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-y-8">
-                <div>
-                    <div class="text-3xl font-bold serif tracking-tighter">VÉRONA</div>
-                    <div class="text-xs text-[#918A7D] mt-1 tracking-widest">PRIVATE ARCHITECTURE &amp; CONSIDERED LIVING</div>
-                </div>
-                
-                <div class="flex flex-wrap gap-x-8 text-sm font-light">
-                    <a href="#" class="hover:text-[#C6A66A]">Instagram</a>
-                    <a href="#" class="hover:text-[#C6A66A]">Journal</a>
-                    <a href="#" class="hover:text-[#C6A66A]">Collections</a>
-                    <a href="#" class="hover:text-[#C6A66A]">Contact</a>
-                </div>
-                
-                <div class="text-xs text-[#918A7D]">
-                    © 2026 VÉRONA
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- Private Enquiry Modal -->
-    <div id="enquiry-modal" onclick="hideEnquiryModal()" class="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-6">
-        <div onclick="event.stopImmediatePropagation()" class="bg-[#0A0A09] max-w-md w-full p-9 border border-white border-opacity-10">
-            <div class="flex justify-between items-center mb-8">
-                <div>
-                    <span class="text-[#C6A66A] text-sm tracking-widest">PRIVATE ENQUIRY</span>
-                </div>
-                <button onclick="hideEnquiryModal()" class="text-[#918A7D] hover:text-white">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            
-            <h4 class="serif text-3xl tracking-tighter">Begin a conversation.</h4>
-            <p class="text-[#918A7D] mt-2 text-sm">We respond to every enquiry within 48 hours.</p>
-            
-            <form class="mt-8 space-y-5" onsubmit="submitEnquiry(event)">
-                <div>
-                    <input type="text" placeholder="Full Name" class="w-full bg-transparent border border-white border-opacity-20 px-5 py-3.5 text-sm focus:outline-none focus:border-[#C6A66A]">
-                </div>
-                <div class="grid grid-cols-2 gap-5">
-                    <div>
-                        <input type="email" placeholder="Email Address" class="w-full bg-transparent border border-white border-opacity-20 px-5 py-3.5 text-sm focus:outline-none focus:border-[#C6A66A]">
-                    </div>
-                    <div>
-                        <input type="tel" placeholder="Phone" class="w-full bg-transparent border border-white border-opacity-20 px-5 py-3.5 text-sm focus:outline-none focus:border-[#C6A66A]">
-                    </div>
-                </div>
-                <div>
-                    <textarea placeholder="Tell us about your project" rows="3" class="w-full bg-transparent border border-white border-opacity-20 px-5 py-3.5 text-sm focus:outline-none focus:border-[#C6A66A]"></textarea>
-                </div>
-                
-                <button type="submit" class="w-full py-4 bg-[#C6A66A] text-[#070706] font-medium tracking-widest text-sm mt-3 hover:bg-white transition-colors">
-                    SUBMIT ENQUIRY
-                </button>
-            </form>
-        </div>
+    <button onclick="openMenu()" class="hidden md:flex items-center gap-3 border border-[#c6a66a] px-5 py-3 text-[10px] tracking-[2px] text-[#c6a66a] hover:bg-[#c6a66a] hover:text-[#070706] transition-all">
+      PRIVATE ENQUIRY <span>↗</span>
+    </button>
+    <button onclick="toggleMenu()" aria-label="Open menu" class="md:hidden w-10 h-10 flex flex-col justify-center gap-1.5">
+      <span class="block w-6 h-px bg-[#f3eee4]"></span><span class="block w-4 h-px bg-[#f3eee4]"></span>
+    </button>
+  </div>
+</header>
+
+<div id="mobileMenu" class="menu-panel fixed inset-0 z-40 bg-[#070706] md:hidden pt-28 px-7">
+  <div class="label mb-8">VÉRONA / NAVIGATION</div>
+  <div class="flex flex-col">
+    <a onclick="toggleMenu()" href="#collections" class="serif text-5xl py-4 border-b border-white/10">Collections</a>
+    <a onclick="toggleMenu()" href="#philosophy" class="serif text-5xl py-4 border-b border-white/10">Philosophy</a>
+    <a onclick="toggleMenu()" href="#materiality" class="serif text-5xl py-4 border-b border-white/10">Materiality</a>
+    <a onclick="toggleMenu()" href="#journal" class="serif text-5xl py-4 border-b border-white/10">Journal</a>
+    <button onclick="openMenu()" class="mt-8 self-start border border-[#c6a66a] px-6 py-4 text-[10px] tracking-[2px] text-[#c6a66a]">PRIVATE ENQUIRY ↗</button>
+  </div>
+</div>
+
+<main>
+<section class="hero relative min-h-screen flex items-end overflow-hidden">
+  <img class="hero-image absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=88" alt="Contemporary luxury villa interior">
+  <div class="hero-overlay absolute inset-0"></div>
+  <div class="relative z-10 w-full max-w-[1500px] mx-auto px-5 md:px-8 pb-16 md:pb-24 pt-40">
+    <div class="max-w-5xl reveal">
+      <div class="flex items-center gap-3 mb-7"><span class="rule w-9"></span><span class="label">PRIVATE ARCHITECTURE / 01</span></div>
+      <h1 class="headline serif">Spaces<br><em class="gold font-normal">Beyond</em><br>Ordinary.</h1>
+      <p class="mt-7 max-w-md text-sm md:text-base leading-7 text-[#d5cfc4]">Architecture shaped around light, material and the quiet luxury of space.</p>
+      <div class="flex flex-wrap gap-3 mt-9">
+        <a href="#collections" class="bg-[#c6a66a] text-[#070706] px-7 py-4 text-[10px] tracking-[2px] font-medium hover:bg-white transition">EXPLORE COLLECTION ↗</a>
+        <button onclick="openMenu()" class="border border-[#f3eee4]/50 px-7 py-4 text-[10px] tracking-[2px] hover:border-[#c6a66a] hover:text-[#c6a66a] transition">PRIVATE ENQUIRY</button>
+      </div>
     </div>
-    
-    <script>
-        // Tailwind Script
-        function initializeTailwind() {
-            document.documentElement.style.setProperty('--accent-gold', '#C6A66A');
-        }
-        
-        // Custom Cursor
-        function initCustomCursor() {
-            const cursor = document.getElementById('cursor');
-            if (!cursor) return;
-            
-            let mouseX = 0, mouseY = 0;
-            
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                
-                cursor.style.left = `${mouseX - 12}px`;
-                cursor.style.top = `${mouseY - 12}px`;
-            });
-            
-            // Hover effect on interactive elements
-            const interactive = document.querySelectorAll('button, a, .project-card');
-            interactive.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'scale(1.8)';
-                    cursor.style.borderColor = '#C6A66A';
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'scale(1)';
-                    cursor.style.borderColor = '#C6A66A';
-                });
-            });
-        }
-        
-        // Enquiry Modal
-        function showEnquiryModal() {
-            document.getElementById('enquiry-modal').classList.remove('hidden');
-            document.getElementById('enquiry-modal').classList.add('flex');
-        }
-        
-        function hideEnquiryModal() {
-            const modal = document.getElementById('enquiry-modal');
-            modal.classList.remove('flex');
-            modal.classList.add('hidden');
-        }
-        
-        function submitEnquiry(e) {
-            e.preventDefault();
-            const modal = document.getElementById('enquiry-modal');
-            modal.innerHTML = `
-                <div class="max-w-md w-full p-9 text-center">
-                    <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#C6A66A] bg-opacity-10">
-                        <i class="fas fa-check text-[#C6A66A] text-2xl"></i>
-                    </div>
-                    <h3 class="mt-6 text-xl serif">Thank you.</h3>
-                    <p class="mt-2 text-[#918A7D]">Your enquiry has been received. We will be in touch shortly.</p>
-                    <button onclick="location.reload()" class="mt-8 text-sm text-[#C6A66A]">CLOSE WINDOW</button>
-                </div>
-            `;
-        }
-        
-        // Scroll animations
-        function initScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const images = entry.target.querySelectorAll('.premium-image, .material-img');
-                        images.forEach((img, index) => {
-                            setTimeout(() => {
-                                img.style.transform = 'scale(1.03)';
-                            }, index * 150);
-                        });
-                        
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.3 });
-            
-            document.querySelectorAll('#philosophy, .project-card').forEach(section => {
-                observer.observe(section);
-            });
-            
-            // Image reveal animation on load
-            const heroImg = document.querySelector('.cinematic-overlay + img');
-            if (heroImg) {
-                heroImg.style.transition = 'transform 2.5s cubic-bezier(0.23, 1, 0.32, 1)';
-            }
-        }
-        
-        // Horizontal scroll enhancement
-        function enhanceHorizontalScroll() {
-            const container = document.querySelector('.horizontal-scroll');
-            if (!container) return;
-            
-            let isDown = false;
-            let startX;
-            let scrollLeft;
-            
-            container.addEventListener('mousedown', (e) => {
-                isDown = true;
-                container.style.cursor = 'grabbing';
-                startX = e.pageX - container.offsetLeft;
-                scrollLeft = container.scrollLeft;
-            });
-            
-            container.addEventListener('mouseleave', () => {
-                isDown = false;
-                container.style.cursor = 'grab';
-            });
-            
-            container.addEventListener('mouseup', () => {
-                isDown = false;
-                container.style.cursor = 'grab';
-            });
-            
-            container.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - container.offsetLeft;
-                const walk = (x - startX) * 2.2;
-                container.scrollLeft = scrollLeft - walk;
-            });
-            
-            container.style.cursor = 'grab';
-        }
-        
-        // Initialize everything
-        function initializeWebsite() {
-            initializeTailwind();
-            initCustomCursor();
-            initScrollAnimations();
-            enhanceHorizontalScroll();
-            
-            // Keyboard accessibility for modal
-            document.addEventListener('keydown', function(e) {
-                if (e.key === "Escape") {
-                    const modal = document.getElementById('enquiry-modal');
-                    if (!modal.classList.contains('hidden')) {
-                        modal.classList.remove('flex');
-                        modal.classList.add('hidden');
-                    }
-                }
-            });
-            
-            // Respect reduced motion
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.documentElement.style.setProperty('--transition-duration', '0ms');
-            }
-            
-            // Subtle initial animation for hero
-            setTimeout(() => {
-                const hero = document.querySelector('section');
-                if (hero) hero.style.opacity = '1';
-            }, 300);
-            
-            // Performance note: all images are lazy loaded
-            console.log('%c[VÉRONA] Ultra-premium website initialized successfully.', 'color:#918A7D');
-        }
-        
-        window.onload = initializeWebsite;
-    </script>
+    <div class="mt-16 flex items-end justify-between text-[9px] tracking-[2px] text-[#918a7d]">
+      <span>DUBAI / GENEVA / PRIVATE RESIDENCES</span><span class="hidden sm:block">SCROLL ↓</span>
+    </div>
+  </div>
+</section>
+
+<div class="marquee py-4">
+  <div class="marquee-track text-[9px] tracking-[4px] text-[#918a7d]">
+    <span>LIGHT</span><span>—</span><span>MATERIAL</span><span>—</span><span>PROPORTION</span><span>—</span><span>SILENCE</span><span>—</span><span>LIGHT</span><span>—</span><span>MATERIAL</span><span>—</span><span>PROPORTION</span><span>—</span><span>SILENCE</span><span>—</span>
+  </div>
+</div>
+
+<section id="philosophy" class="max-w-[1500px] mx-auto px-5 md:px-8 py-24 md:py-36">
+  <div class="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+    <div class="lg:col-span-7 reveal">
+      <div class="label mb-6">02 — PHILOSOPHY</div>
+      <h2 class="section-title serif">We don't design houses.<br><em class="gold font-normal">We design how life feels.</em></h2>
+      <p class="editorial max-w-xl mt-9">Our work is defined by restraint, proportion and an unwavering attention to how light moves through space. Every residence is considered as a composition of time, material and presence.</p>
+      <div class="mt-8 flex items-center gap-4 text-[10px] tracking-[2px] text-[#918a7d]"><span class="w-7 h-px bg-[#c6a66a]"></span>EST. 2012 — GENEVA / DUBAI</div>
+    </div>
+    <div class="lg:col-span-5 reveal">
+      <div class="aspect-[4/5] overflow-hidden">
+        <img class="w-full h-full object-cover project-image" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=85" alt="Minimal luxury interior with natural light" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="collections" class="max-w-[1500px] mx-auto px-5 md:px-8 pb-28">
+  <div class="flex justify-between items-end mb-10 reveal"><div><div class="label">03 — SIGNATURE COLLECTION</div><h2 class="section-title serif mt-3">Selected Residences</h2></div><span class="hidden md:block text-[10px] tracking-[2px] text-[#918a7d]">03 / 12 PRIVATE PROJECTS</span></div>
+  <div class="space-y-5">
+    <article class="project grid lg:grid-cols-12 reveal">
+      <div class="lg:col-span-8 aspect-[16/10] lg:aspect-auto lg:min-h-[560px] overflow-hidden"><img class="project-image w-full h-full object-cover" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=88" alt="CASA NOIR contemporary villa" loading="lazy"></div>
+      <div class="lg:col-span-4 p-7 md:p-10 flex flex-col justify-between min-h-[300px]">
+        <div><div class="flex items-center gap-3 text-[10px] text-[#c6a66a] mb-5"><span>01</span><span class="flex-1 h-px bg-white/10"></span></div><h3 class="serif text-4xl md:text-5xl">CASA NOIR</h3><p class="text-sm text-[#918a7d] mt-2">Dubai Hills / 8,400 SQ.FT</p></div>
+        <div><div class="project-line h-px bg-[#c6a66a] mb-5"></div><div class="flex justify-between text-[9px] tracking-[1.8px]"><span>2024</span><button class="text-[#c6a66a]">VIEW RESIDENCE ↗</button></div></div>
+      </div>
+    </article>
+    <article class="project grid lg:grid-cols-12 reveal">
+      <div class="lg:col-span-8 aspect-[16/10] lg:aspect-auto lg:min-h-[560px] overflow-hidden"><img class="project-image w-full h-full object-cover" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=88" alt="THE AURELIA waterfront residence" loading="lazy"></div>
+      <div class="lg:col-span-4 p-7 md:p-10 flex flex-col justify-between min-h-[300px]">
+        <div><div class="flex items-center gap-3 text-[10px] text-[#c6a66a] mb-5"><span>02</span><span class="flex-1 h-px bg-white/10"></span></div><h3 class="serif text-4xl md:text-5xl">THE AURELIA</h3><p class="text-sm text-[#918a7d] mt-2">Palm Jumeirah / 11,200 SQ.FT</p></div>
+        <div><div class="project-line h-px bg-[#c6a66a] mb-5"></div><div class="flex justify-between text-[9px] tracking-[1.8px]"><span>2023</span><button class="text-[#c6a66a]">VIEW RESIDENCE ↗</button></div></div>
+      </div>
+    </article>
+    <article class="project grid lg:grid-cols-12 reveal">
+      <div class="lg:col-span-8 aspect-[16/10] lg:aspect-auto lg:min-h-[560px] overflow-hidden"><img class="project-image w-full h-full object-cover" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1800&q=88" alt="VILLA ELAN modern private residence" loading="lazy"></div>
+      <div class="lg:col-span-4 p-7 md:p-10 flex flex-col justify-between min-h-[300px]">
+        <div><div class="flex items-center gap-3 text-[10px] text-[#c6a66a] mb-5"><span>03</span><span class="flex-1 h-px bg-white/10"></span></div><h3 class="serif text-4xl md:text-5xl">VILLA ÉLAN</h3><p class="text-sm text-[#918a7d] mt-2">Emirates Hills / 14,600 SQ.FT</p></div>
+        <div><div class="project-line h-px bg-[#c6a66a] mb-5"></div><div class="flex justify-between text-[9px] tracking-[1.8px]"><span>2024</span><button class="text-[#c6a66a]">VIEW RESIDENCE ↗</button></div></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="materiality" class="bg-[#0a0a09] py-24 md:py-32">
+  <div class="max-w-[1500px] mx-auto px-5 md:px-8">
+    <div class="max-w-2xl reveal"><div class="label">04 — MATERIALITY</div><h2 class="section-title serif mt-4">Material becomes <em class="gold font-normal">atmosphere.</em></h2><p class="editorial mt-7 max-w-lg">Stone, timber, bronze and glass are not decoration. They are the vocabulary through which a residence speaks.</p></div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-14">
+      <div class="material aspect-square reveal"><img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85" alt="Travertine interior detail" loading="lazy"><span class="absolute z-10 bottom-5 left-5 text-[9px] tracking-[2px]">TRAVERTINE</span></div>
+      <div class="material aspect-square reveal"><img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85" alt="Natural oak interior detail" loading="lazy"><span class="absolute z-10 bottom-5 left-5 text-[9px] tracking-[2px]">NATURAL OAK</span></div>
+      <div class="material aspect-square reveal"><img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=85" alt="Marble interior detail" loading="lazy"><span class="absolute z-10 bottom-5 left-5 text-[9px] tracking-[2px]">CALACATTA</span></div>
+      <div class="material aspect-square reveal"><img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85" alt="Bronze and glass interior detail" loading="lazy"><span class="absolute z-10 bottom-5 left-5 text-[9px] tracking-[2px]">BRONZE / GLASS</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="max-w-[1500px] mx-auto px-5 md:px-8 py-28">
+  <div class="flex justify-between items-end mb-10 reveal"><div><div class="label">05 — THE EXPERIENCE</div><h2 class="section-title serif mt-3">Five moments.<br><em class="gold font-normal">One feeling.</em></h2></div><span class="hidden md:block text-[9px] tracking-[2px] text-[#918a7d]">DRAG TO EXPLORE →</span></div>
+  <div class="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-3" style="scrollbar-width:none">
+    <div class="min-w-[78vw] md:min-w-[420px] snap-start reveal"><div class="aspect-[4/3] overflow-hidden"><img class="w-full h-full object-cover project-image" src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1100&q=85" alt="Arrival" loading="lazy"></div><div class="flex gap-4 mt-4"><span class="label">01</span><h3 class="serif text-3xl">Arrival</h3></div></div>
+    <div class="min-w-[78vw] md:min-w-[420px] snap-start reveal"><div class="aspect-[4/3] overflow-hidden"><img class="w-full h-full object-cover project-image" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1100&q=85" alt="Light" loading="lazy"></div><div class="flex gap-4 mt-4"><span class="label">02</span><h3 class="serif text-3xl">Light</h3></div></div>
+    <div class="min-w-[78vw] md:min-w-[420px] snap-start reveal"><div class="aspect-[4/3] overflow-hidden"><img class="w-full h-full object-cover project-image" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1100&q=85" alt="Material" loading="lazy"></div><div class="flex gap-4 mt-4"><span class="label">03</span><h3 class="serif text-3xl">Material</h3></div></div>
+    <div class="min-w-[78vw] md:min-w-[420px] snap-start reveal"><div class="aspect-[4/3] overflow-hidden"><img class="w-full h-full object-cover project-image" src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1100&q=85" alt="Silence" loading="lazy"></div><div class="flex gap-4 mt-4"><span class="label">04</span><h3 class="serif text-3xl">Silence</h3></div></div>
+    <div class="min-w-[78vw] md:min-w-[420px] snap-start reveal"><div class="aspect-[4/3] overflow-hidden"><img class="w-full h-full object-cover project-image" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1100&q=85" alt="View" loading="lazy"></div><div class="flex gap-4 mt-4"><span class="label">05</span><h3 class="serif text-3xl">View</h3></div></div>
+  </div>
+</section>
+
+<section id="journal" class="border-t border-white/10 max-w-[1500px] mx-auto px-5 md:px-8 py-24">
+  <div class="flex justify-between items-end mb-12 reveal"><div><div class="label">06 — JOURNAL</div><h2 class="section-title serif mt-3">Notes on modern living.</h2></div><span class="hidden md:block text-[9px] tracking-[2px] text-[#918a7d]">SELECTED EDITIONS</span></div>
+  <div class="grid md:grid-cols-3 gap-8">
+    <article class="group reveal"><div class="aspect-[4/3] overflow-hidden"><img class="w-full h-full object-cover project-image" src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1000&q=85" alt="Architecture and natural light" loading="lazy"></div><div class="pt-5"><span class="text-[9px] tracking-[2px] text-[#918a7d]">02.25 / ESSAY</span><h3 class="serif text-2xl mt-2 group-hover:text-[#c6a66a] transition">Architecture & Natural Light</h3></div></article>
+    <article class="group reveal"><div class="aspect-[4/3] overflow-hidden"><img class="w-full h-full object-cover project-image" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85" alt="Designing for stillness" loading="lazy"></div><div class="pt-5"><span class="text-[9px] tracking-[2px] text-[#918a7d]">01.25 / NOTES</span><h3 class="serif text-2xl mt-2 group-hover:text-[#c6a66a] transition">Designing for Stillness</h3></div></article>
+    <article class="group reveal"><div class="aspect-[4/3] overflow-hidden"><img class="w-full h-full object-cover project-image" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1000&q=85" alt="The new language of luxury" loading="lazy"></div><div class="pt-5"><span class="text-[9px] tracking-[2px] text-[#918a7d]">12.24 / EDITION</span><h3 class="serif text-2xl mt-2 group-hover:text-[#c6a66a] transition">The New Language of Luxury</h3></div></article>
+  </div>
+</section>
+
+<section id="contact" class="relative min-h-[75vh] flex items-center overflow-hidden">
+  <img class="absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=2200&q=88" alt="Luxury residence at dusk" loading="lazy">
+  <div class="absolute inset-0 bg-[#070706]/70"></div>
+  <div class="relative z-10 max-w-[1500px] mx-auto px-5 md:px-8 w-full py-28">
+    <div class="max-w-3xl reveal"><div class="label">07 — PRIVATE ENQUIRY</div><h2 class="section-title serif mt-5">Your next address should feel <em class="gold font-normal">unforgettable.</em></h2><p class="editorial max-w-lg mt-7">Private residences, considered architecture and spaces designed around you.</p><button onclick="openMenu()" class="mt-9 border border-[#c6a66a] px-7 py-4 text-[10px] tracking-[2px] text-[#c6a66a] hover:bg-[#c6a66a] hover:text-[#070706] transition">BEGIN A PRIVATE CONVERSATION ↗</button></div>
+  </div>
+</section>
+</main>
+
+<footer class="border-t border-white/10">
+  <div class="max-w-[1500px] mx-auto px-5 md:px-8 py-12">
+    <div class="flex flex-col md:flex-row justify-between gap-8">
+      <div><div class="serif text-3xl">VÉRONA</div><div class="text-[9px] tracking-[2px] text-[#918a7d] mt-2">PRIVATE ARCHITECTURE & CONSIDERED LIVING</div></div>
+      <div class="flex gap-7 text-[10px] tracking-[1.5px] text-[#918a7d]"><a href="#collections" class="hover:text-[#c6a66a]">COLLECTIONS</a><a href="#journal" class="hover:text-[#c6a66a]">JOURNAL</a><a href="#contact" class="hover:text-[#c6a66a]">CONTACT</a></div>
+      <div class="text-[9px] tracking-[1.5px] text-[#918a7d]">© 2026 VÉRONA</div>
+    </div>
+  </div>
+</footer>
+
+<div id="modal" class="hidden fixed inset-0 z-[80] bg-black/85 backdrop-blur-sm items-center justify-center p-5">
+  <div class="bg-[#0b0b0a] border border-white/10 max-w-lg w-full p-7 md:p-10 relative">
+    <button onclick="closeModal()" class="absolute top-5 right-5 text-[#918a7d] text-xl">×</button>
+    <div class="label">PRIVATE ENQUIRY</div><h2 class="serif text-4xl mt-3">Begin a conversation.</h2><p class="text-sm text-[#918a7d] mt-3">Tell us a little about the residence you have in mind.</p>
+    <form class="mt-7 space-y-4" onsubmit="submitForm(event)">
+      <input required placeholder="Full name" class="w-full bg-transparent border border-white/15 px-4 py-4 text-sm outline-none focus:border-[#c6a66a]">
+      <input required type="email" placeholder="Email address" class="w-full bg-transparent border border-white/15 px-4 py-4 text-sm outline-none focus:border-[#c6a66a]">
+      <textarea required rows="4" placeholder="Tell us about your project" class="w-full bg-transparent border border-white/15 px-4 py-4 text-sm outline-none focus:border-[#c6a66a]"></textarea>
+      <button class="w-full bg-[#c6a66a] text-[#070706] py-4 text-[10px] tracking-[2px] font-medium hover:bg-white transition">SEND ENQUIRY ↗</button>
+    </form>
+  </div>
+</div>
+
+<script>
+const menu=document.getElementById('mobileMenu'),modal=document.getElementById('modal');
+function toggleMenu(){menu.classList.toggle('open');document.body.classList.toggle('no-scroll',menu.classList.contains('open'))}
+function openMenu(){modal.classList.remove('hidden');modal.classList.add('flex')}
+function closeModal(){modal.classList.add('hidden');modal.classList.remove('flex')}
+function submitForm(e){e.preventDefault();e.target.innerHTML='<div class="py-10 text-center"><div class="label">ENQUIRY RECEIVED</div><h3 class="serif text-3xl mt-3">Thank you.</h3><p class="text-sm text-[#918a7d] mt-3">This concept form is ready to connect to a real enquiry inbox.</p><button type="button" onclick="closeModal()" class="mt-7 text-[10px] tracking-[2px] text-[#c6a66a]">CLOSE</button></div>'}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.classList.remove('open');document.body.classList.remove('no-scroll');closeModal()}})
+const progress=document.getElementById('progress');
+window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-innerHeight;progress.style.width=(scrollY/h*100)+'%'},{passive:true});
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const cursor=document.getElementById('cursor');
+if(matchMedia('(pointer:fine)').matches){document.body.classList.add('cursor-ready');addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-grow'));el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-grow'))})}
+</script>
 </body>
 </html>
