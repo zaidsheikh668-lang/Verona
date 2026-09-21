@@ -144,13 +144,17 @@ body.cursor-grow .cursor{width:52px;height:52px}
 </section>
 
 <section id="collections" class="max-w-[1500px] mx-auto px-5 md:px-8 pb-28">
+  <div class="reveal mb-8 flex items-center justify-between border-y border-white/10 py-5">
+    <span class="text-[9px] tracking-[3px] text-[#918a7d]">THE VÉRONA STANDARD</span>
+    <span class="text-[9px] tracking-[2px] text-[#c6a66a]">CURATED / PRIVATE / TIMELESS</span>
+  </div>
   <div class="flex justify-between items-end mb-10 reveal"><div><div class="label">03 — SIGNATURE COLLECTION</div><h2 class="section-title serif mt-3">Selected Residences</h2></div><span class="hidden md:block text-[10px] tracking-[2px] text-[#918a7d]">03 / 12 PRIVATE PROJECTS</span></div>
   <div class="space-y-5">
     <article class="project grid lg:grid-cols-12 reveal">
       <div class="lg:col-span-8 aspect-[16/10] lg:aspect-auto lg:min-h-[560px] overflow-hidden"><img class="project-image w-full h-full object-cover" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=88" alt="CASA NOIR contemporary villa" loading="lazy"></div>
       <div class="lg:col-span-4 p-7 md:p-10 flex flex-col justify-between min-h-[300px]">
         <div><div class="flex items-center gap-3 text-[10px] text-[#c6a66a] mb-5"><span>01</span><span class="flex-1 h-px bg-white/10"></span></div><h3 class="serif text-4xl md:text-5xl">CASA NOIR</h3><p class="text-sm text-[#918a7d] mt-2">Dubai Hills / 8,400 SQ.FT</p></div>
-        <div><div class="project-line h-px bg-[#c6a66a] mb-5"></div><div class="flex justify-between text-[9px] tracking-[1.8px]"><span>2024</span><button class="text-[#c6a66a]">VIEW RESIDENCE ↗</button></div></div>
+        <div><div class="project-line h-px bg-[#c6a66a] mb-5"></div><div class="flex justify-between text-[9px] tracking-[1.8px]"><span>2024</span><button type="button" onclick="openResidence(this)" class="text-[#c6a66a] hover:text-white transition">VIEW RESIDENCE ↗</button></div></div>
       </div>
     </article>
     <article class="project grid lg:grid-cols-12 reveal">
@@ -221,6 +225,18 @@ body.cursor-grow .cursor{width:52px;height:52px}
   </div>
 </footer>
 
+<div id="residenceModal" class="hidden fixed inset-0 z-[75] bg-black/85 backdrop-blur-sm items-center justify-center p-5">
+  <div class="modal-panel bg-[#0b0b0a] border border-white/10 max-w-2xl w-full p-7 md:p-10 relative">
+    <button onclick="closeResidence()" class="absolute top-5 right-5 text-[#918a7d] text-xl" aria-label="Close">×</button>
+    <div class="label">SELECTED RESIDENCE</div>
+    <h2 id="residenceTitle" class="serif text-4xl md:text-5xl mt-3">CASA NOIR</h2>
+    <p id="residenceMeta" class="text-sm text-[#918a7d] mt-2">Dubai Hills / Private Residence</p>
+    <div class="rule w-16 mt-7"></div>
+    <p id="residenceCopy" class="editorial mt-6 max-w-xl">A considered residence where natural stone, controlled daylight and quiet proportions create a sense of permanence.</p>
+    <button onclick="openMenu();closeResidence()" class="mt-8 border border-[#c6a66a] px-6 py-4 text-[10px] tracking-[2px] text-[#c6a66a] hover:bg-[#c6a66a] hover:text-[#070706] transition">PRIVATE ENQUIRY ↗</button>
+  </div>
+</div>
+
 <div id="modal" class="hidden fixed inset-0 z-[80] bg-black/85 backdrop-blur-sm items-center justify-center p-5">
   <div class="bg-[#0b0b0a] border border-white/10 max-w-lg w-full p-7 md:p-10 relative">
     <button onclick="closeModal()" class="absolute top-5 right-5 text-[#918a7d] text-xl">×</button>
@@ -249,8 +265,23 @@ function closeModal(){
   modal.classList.remove('flex');
   document.body.classList.remove('no-scroll');
 }
+function openResidence(button){
+  const card=button.closest('.project');
+  const title=card?.querySelector('h3')?.textContent?.trim() || 'VÉRONA RESIDENCE';
+  const meta=card?.querySelector('p')?.textContent?.trim() || 'Private Residence';
+  document.getElementById('residenceTitle').textContent=title;
+  document.getElementById('residenceMeta').textContent=meta;
+  document.getElementById('residenceModal').classList.remove('hidden');
+  document.getElementById('residenceModal').classList.add('flex');
+  document.body.classList.add('no-scroll');
+}
+function closeResidence(){
+  const el=document.getElementById('residenceModal');
+  el.classList.add('hidden'); el.classList.remove('flex');
+  if(modal.classList.contains('hidden') && !menu.classList.contains('open')) document.body.classList.remove('no-scroll');
+}
 function submitForm(e){e.preventDefault();e.target.innerHTML='<div class="py-10 text-center"><div class="label">ENQUIRY RECEIVED</div><h3 class="serif text-3xl mt-3">Thank you.</h3><p class="text-sm text-[#918a7d] mt-3">This concept form is ready to connect to a real enquiry inbox.</p><button type="button" onclick="closeModal()" class="mt-7 text-[10px] tracking-[2px] text-[#c6a66a]">CLOSE</button></div>'}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.classList.remove('open');closeModal()}})
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.classList.remove('open');closeModal();closeResidence()}})
 const progress=document.getElementById('progress');
 window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-innerHeight;progress.style.width=(scrollY/h*100)+'%'},{passive:true});
 const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});
