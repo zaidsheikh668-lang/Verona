@@ -64,7 +64,7 @@ body.cursor-grow .cursor{width:52px;height:52px}
  @keyframes modalIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
 }
 @media(prefers-reduced-motion:reduce){
- html{scroll-behavior:auto}.hero-image,.project-image,.material img,.reveal{transition:none}.marquee-track{animation:none}
+ html{scroll-behavior:auto}.hero-image,.project-image,.material img,.reveal{transition:none}.marquee-track,.hero:before,.hero-content,.hero-meta{animation:none}
 }
 </style>
 </head>
@@ -106,7 +106,7 @@ body.cursor-grow .cursor{width:52px;height:52px}
   <img class="hero-image absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=88" alt="Contemporary luxury villa interior">
   <div class="hero-overlay absolute inset-0"></div>
   <div class="relative z-10 w-full max-w-[1500px] mx-auto px-5 md:px-8 pb-16 md:pb-24 pt-40">
-    <div class="max-w-5xl reveal">
+    <div class="max-w-5xl reveal hero-content">
       <div class="flex items-center gap-3 mb-7"><span class="rule w-9"></span><span class="label">PRIVATE ARCHITECTURE / 01</span></div>
       <h1 class="headline serif">Spaces<br><em class="gold font-normal">Beyond</em><br>Ordinary.</h1>
       <p class="mt-7 max-w-md text-sm md:text-base leading-7 text-[#d5cfc4]">Architecture shaped around light, material and the quiet luxury of space.</p>
@@ -115,8 +115,8 @@ body.cursor-grow .cursor{width:52px;height:52px}
         <button onclick="openMenu()" class="border border-[#f3eee4]/50 px-7 py-4 text-[10px] tracking-[2px] hover:border-[#c6a66a] hover:text-[#c6a66a] transition">PRIVATE ENQUIRY</button>
       </div>
     </div>
-    <div class="mt-16 flex items-end justify-between text-[9px] tracking-[2px] text-[#918a7d]">
-      <span>DUBAI / GENEVA / PRIVATE RESIDENCES</span><span class="hidden sm:block">SCROLL ↓</span>
+    <div class="mt-16 flex items-end justify-between text-[9px] tracking-[2px] text-[#918a7d] hero-meta">
+      <span>DUBAI / GENEVA / PRIVATE RESIDENCES</span><span class="hidden sm:flex items-center gap-3">SCROLL <span class="inline-block w-10 h-px bg-[#c6a66a]/60"></span> ↓</span>
     </div>
   </div>
 </section>
