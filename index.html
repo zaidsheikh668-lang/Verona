@@ -66,10 +66,32 @@ body.cursor-grow .cursor{width:52px;height:52px}
 @media(prefers-reduced-motion:reduce){
  html{scroll-behavior:auto}.hero-image,.project-image,.material img,.reveal{transition:none}.marquee-track,.hero:before,.hero-content,.hero-meta{animation:none}
 }
+
+/* VÉRONA cinematic polish */
+body:before{content:"";position:fixed;inset:0;z-index:120;background:#070706;pointer-events:none;opacity:0;transition:opacity .8s ease}
+.site-loader{position:fixed;inset:0;z-index:110;background:#070706;display:flex;align-items:center;justify-content:center;transition:opacity 1s ease,visibility 1s ease}
+.site-loader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.loader-mark{text-align:center}.loader-mark .serif{font-size:34px;letter-spacing:-.04em}.loader-line{width:70px;height:1px;background:#c6a66a;margin:18px auto 0;transform-origin:left;animation:loaderLine 1.4s ease forwards}
+@keyframes loaderLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero video{filter:saturate(.9) contrast(1.04)}
+.hero video::-webkit-media-controls{display:none!important}
+.hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 72% 30%,transparent 0,rgba(0,0,0,.14) 55%,rgba(0,0,0,.35) 100%)}
+.nav{transition:background .45s ease,box-shadow .45s ease}
+.nav.scrolled{background:rgba(7,7,6,.88);box-shadow:0 10px 35px rgba(0,0,0,.18)}
+.gold-line{position:relative}.gold-line:after{content:"";display:block;width:46px;height:1px;background:#c6a66a;margin-top:22px}
+@media(max-width:767px){.site-loader .loader-mark .serif{font-size:28px}.hero-image{transform:scale(1.02)}}
 </style>
 </head>
 <body>
 <div class="progress" id="progress"></div>
+<div id="siteLoader" class="site-loader" aria-hidden="true">
+  <div class="loader-mark">
+    <div class="serif">VÉRONA</div>
+    <div class="label mt-3">PRIVATE ARCHITECTURE</div>
+    <div class="loader-line"></div>
+  </div>
+</div>
+
 <div class="cursor" id="cursor"></div>
 
 <header class="nav fixed top-0 left-0 right-0 z-50">
@@ -161,7 +183,7 @@ body.cursor-grow .cursor{width:52px;height:52px}
       <div class="lg:col-span-8 aspect-[16/10] lg:aspect-auto lg:min-h-[560px] overflow-hidden"><img class="project-image w-full h-full object-cover" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=88" alt="THE AURELIA waterfront residence" loading="lazy"></div>
       <div class="lg:col-span-4 p-7 md:p-10 flex flex-col justify-between min-h-[300px]">
         <div><div class="flex items-center gap-3 text-[10px] text-[#c6a66a] mb-5"><span>02</span><span class="flex-1 h-px bg-white/10"></span></div><h3 class="serif text-4xl md:text-5xl">THE AURELIA</h3><p class="text-sm text-[#918a7d] mt-2">Palm Jumeirah / 11,200 SQ.FT</p></div>
-        <div><div class="project-line h-px bg-[#c6a66a] mb-5"></div><div class="flex justify-between text-[9px] tracking-[1.8px]"><span>2023</span><button class="text-[#c6a66a]">VIEW RESIDENCE ↗</button></div></div>
+        <div><div class="project-line h-px bg-[#c6a66a] mb-5"></div><div class="flex justify-between text-[9px] tracking-[1.8px]"><span>2023</span><button type="button" onclick="openResidence(this)" class="text-[#c6a66a] hover:text-white transition">VIEW RESIDENCE ↗</button></div></div>
       </div>
     </article>
     <article class="project grid lg:grid-cols-12 reveal">
@@ -280,7 +302,7 @@ function closeResidence(){
   el.classList.add('hidden'); el.classList.remove('flex');
   if(modal.classList.contains('hidden') && !menu.classList.contains('open')) document.body.classList.remove('no-scroll');
 }
-function submitForm(e){e.preventDefault();e.target.innerHTML='<div class="py-10 text-center"><div class="label">ENQUIRY RECEIVED</div><h3 class="serif text-3xl mt-3">Thank you.</h3><p class="text-sm text-[#918a7d] mt-3">This concept form is ready to connect to a real enquiry inbox.</p><button type="button" onclick="closeModal()" class="mt-7 text-[10px] tracking-[2px] text-[#c6a66a]">CLOSE</button></div>'}
+function submitForm(e){e.preventDefault();e.target.innerHTML='<div class="py-10 text-center"><div class="label">ENQUIRY RECEIVED</div><h3 class="serif text-3xl mt-3">Thank you.</h3><p class="text-sm text-[#918a7d] mt-3">A member of the VÉRONA studio will be in touch shortly.</p><button type="button" onclick="closeModal()" class="mt-7 text-[10px] tracking-[2px] text-[#c6a66a]">CLOSE</button></div>'}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.classList.remove('open');closeModal();closeResidence()}})
 const progress=document.getElementById('progress');
 window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-innerHeight;progress.style.width=(scrollY/h*100)+'%'},{passive:true});
@@ -294,6 +316,20 @@ document.querySelectorAll('img').forEach(img=>{
 });
 const cursor=document.getElementById('cursor');
 if(matchMedia('(pointer:fine)').matches){document.body.classList.add('cursor-ready');addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-grow'));el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-grow'))})}
+
+const siteLoader=document.getElementById('siteLoader');
+const siteNav=document.querySelector('.nav');
+const heroVideo=document.querySelector('.hero video');
+window.addEventListener('load',()=>{
+  setTimeout(()=>siteLoader?.classList.add('hide'),450);
+});
+if(heroVideo){
+  heroVideo.addEventListener('loadeddata',()=>heroVideo.classList.add('loaded'),{once:true});
+  heroVideo.play().catch(()=>{});
+}
+window.addEventListener('scroll',()=>{
+  siteNav?.classList.toggle('scrolled',window.scrollY>40);
+},{passive:true});
 </script>
 </body>
 </html>
